@@ -1,14 +1,14 @@
-import { EpochNumber } from "rpc";
+import { EpochNumber, Block } from "./rpc";
 
 type str0num = string | number;  // string or number
 type str0buf = string | Buffer;
 
 export interface ConfluxOption {
     url: string,
-    defaultEpoch: string|number,  // default 'latest_state'
-    defaultGasPrice: string|number,
-    defaultGas: string|number,
-    defaultStorageLimit: string|number,
+    defaultEpoch: string | number,  // default 'latest_state'
+    defaultGasPrice: string | number,
+    defaultGas: string | number,
+    defaultStorageLimit: string | number,
     defaultChainId: number,
 }
 
@@ -26,25 +26,25 @@ export class Conflux {
     setProvider(provider: Provider): Provider;
     Account(privateKey: string): any;
     Contract(options: any): any;
-    close():any;
+    close(): any;
 
     getStatus(): Promise<any>;
     getGasPrice(): string;
-    getEpochNumber(epochNumber: EpochNumber): EpochNumber;
+    getEpochNumber(epochNumber?: EpochNumber): Promise<number>;
     getLogs(options: any): any;
-    getBalance(address: string, epochNumber: EpochNumber): string;
+    getBalance(address: string, epochNumber: EpochNumber): Promise<number>;
     getNextNonce(): Promise<number>;
-    getConfirmationRiskByHash():Promise<number|null>;
-    getBlockByEpochNumber(): Promise<object|null>;
+    getConfirmationRiskByHash(): Promise<number | null>;
+    getBlockByEpochNumber(epochNumber: EpochNumber | null, detail?: boolean): Promise<Block | null>;
     getBlocksByEpochNumber(): Promise<string[]>;
     getBestBlockHash(): string;
-    getBlockByHash(): Promise<object|null>;
+    getBlockByHash(): Promise<object | null>;
     getBlockByHashWithPivotAssumption(): any;
-    getTransactionByHash(): Promise<object|null>;
-    getTransactionReceipt(): Promise<object|null>;
+    getTransactionByHash(txhash: string): Promise<object | null>;
+    getTransactionReceipt(): Promise<object | null>;
     sendTransaction(): any;
     sendRawTransaction(): any;
-    getCode(): Promise<string>;
+    getCode(address: string): Promise<string>;
     call(): Promise<string>;
     estimateGasAndCollateral(options: any): Promise<object>;
 }
