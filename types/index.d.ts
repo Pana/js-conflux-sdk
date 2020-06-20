@@ -1,4 +1,5 @@
-import { EpochNumber, Block } from "./rpc";
+import { EpochNumber, Block, TransactionConfig, Transaction as txStruct, TransactionReceipt } from "./rpc";
+export * from "./rpc"
 
 type str0num = string | number;  // string or number
 type str0buf = string | Buffer;
@@ -40,9 +41,9 @@ export class Conflux {
     getBestBlockHash(): string;
     getBlockByHash(): Promise<object | null>;
     getBlockByHashWithPivotAssumption(): any;
-    getTransactionByHash(txhash: string): Promise<object | null>;
-    getTransactionReceipt(): Promise<object | null>;
-    sendTransaction(): any;
+    getTransactionByHash(txhash: string): Promise<txStruct | null>;
+    getTransactionReceipt(txhash: string): Promise<TransactionReceipt | null>;
+    sendTransaction(tx: TransactionConfig, password?: string): Promise<any>;
     sendRawTransaction(): any;
     getCode(address: string): Promise<string>;
     call(): Promise<string>;

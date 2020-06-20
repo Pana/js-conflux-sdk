@@ -1,4 +1,3 @@
-
 // import BN = require('bn.js');
 // import BigNumber from 'bignumber.js';
 // import Big from 'big.mjs';
@@ -37,9 +36,9 @@ export interface Block extends BlockHeader {
 
 // transaction config
 export interface TransactionConfig {
-    from: Address;
-    to: Address;
-    value: Quantity;
+    from?: Address;
+    to?: Address;
+    value?: Quantity;
     nonce?: number;
     gasPrice?: number;
     gas?: number;
@@ -51,6 +50,7 @@ export interface TransactionConfig {
 
 export interface Transaction {
     blockHash: string | null;
+    epochHeight: string | null;
     contractCreated: string | null;
     data: string;
     from: Address;
@@ -91,7 +91,7 @@ export interface CfxCallConfig {
     nonce: number;
 }
 
-export interface CfxLogConfig{
+export interface CfxLogConfig {
     fromEpoch: EpochNumber;
     toEpoch: EpochNumber;
     blockHashes: string[];
